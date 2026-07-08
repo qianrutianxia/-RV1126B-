@@ -1,0 +1,36 @@
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/rockchip.h>
+
+/*
+A0-------GPIO5_A0
+A1-------GPIO5_A1
+A2-------GPIO5_A2
+A3-------GPIO5_A3
+EL-------GPIO5_B0
+*/
+
+/{
+    rti_light_source: rti_light_source{
+        compatible = "harry,rti_light_source";
+        pinctrl-names = "default";
+        pinctrl-0 = <&rti_light_source_pins>;
+        ADDR-gpios = <&gpio5 RK_PA0 GPIO_ACTIVE_HIGH>,
+                     <&gpio5 RK_PA1 GPIO_ACTIVE_HIGH>,
+                     <&gpio5 RK_PA2 GPIO_ACTIVE_HIGH>,
+                     <&gpio5 RK_PA3 GPIO_ACTIVE_HIGH>;
+        EL-gpios = <&gpio5 RK_PB0 GPIO_ACTIVE_LOW>;
+    };
+};
+    
+&pinctrl{
+	rti_light_source{
+	    rti_light_source_pins: rti_light_source_pins{
+            rockchip,pins = <5 RK_PA0 RK_FUNC_GPIO &pcfg_pull_none>,
+                            <5 RK_PA1 RK_FUNC_GPIO &pcfg_pull_none>,
+                            <5 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>,
+                            <5 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>,
+                            <5 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+	    };
+	};
+};
+
